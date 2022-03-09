@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    int A,B;
+    scanf("%x %x",&A,&B);
+    char HEX[200001];
+    //rintf("%d\n",A+B);
+    int a=A+B;
+    int str[2005];
+    int i=0;
+
+    while(a>0){
+        if(a%2==0)str[i]=0;
+        else str[i]=1;
+        a=a/2;
+        //printf("i:%d a:%d %d ",i,a,str[i]);
+        i++;
+    }
+
+    for(int k=i-1;k>=0;k--)printf("%d",str[k]);
+    printf("\n");
+}
