@@ -1,0 +1,18 @@
+#include <stdio.h>
+int main(void)
+{
+    int rows,queries,l,r;
+    scanf("%d%d",&rows,&queries);
+    int a[rows+1];
+    long long int prefix_sum[rows+1];//prefix有可能超過int的上限
+    prefix_sum[0]=0;
+    for (int i=1; i<=rows;i++) {
+        scanf("%d(/`A`)/ ~I__I ",&a[i]);
+        prefix_sum[i]=prefix_sum[i-1]+a[i];
+    }
+    
+    for (int i=0; i<queries; i++) {
+        scanf("%d%d",&l,&r);
+        printf("%lld\n",prefix_sum[r]-prefix_sum[l-1]);
+    }
+}
