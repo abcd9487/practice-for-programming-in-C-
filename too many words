@@ -1,0 +1,9 @@
+#include <stdio.h>
+int main()
+{
+	char c;
+	while((c = getchar()) != EOF) printf("%c",c);
+	return 0;
+}
+//getchar()用法
+//https://www.delftstack.com/zh-tw/howto/c/getchar-in-c/
