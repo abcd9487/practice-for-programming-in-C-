@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+long long int prefix[1000005];
+
+int main(){
+    int n,q;
+    scanf("%d %d",&n,&q);
+    int number;
+    prefix[0]=0;
+    for(int i=1;i<=n;i++){
+       scanf("%d",&number);
+       if(number>0)prefix[i]=prefix[i-1]+number;
+       else prefix[i]=prefix[i-1];
+    }
+    for(int i=1;i<=q;i++){
+        int l,r,m;
+        scanf("%d %d %d",&l,&r,&m);
+        printf("%lld\n",prefix[l+m-1]-prefix[l-1]);
+        //m為最多可奪取的寶物
+        //且此題是由小排到大，不需要額外考慮sorting的問題
+        //
+    }
+}
