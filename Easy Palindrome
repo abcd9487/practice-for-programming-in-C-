@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    int N,M;
+    scanf("%d.%d",&N,&M);
+    int n[4];
+    int m[4];
+    int i=1;
+    int tn=N;
+    int tm=M;
+    while(i<=3){
+        n[i]=tn%10;
+        m[i]=tm%10;
+        tn=tn/10;
+        tm=tm/10;
+        i++;
+    }
+    int flag=0;
+    int part1=N+100*n[1]+10*n[2]+n[3];
+    int part2=M+100*m[1]+10*m[2]+m[3];
+    if(part2>=1000){
+        part2=part2-1000;
+        flag=1;
+    }
+    if(flag)part1+=1;
+    printf("%d.%d\n",part1,part2);
+}
