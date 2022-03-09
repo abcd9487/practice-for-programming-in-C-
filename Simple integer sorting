@@ -1,0 +1,38 @@
+//qsort 用法:
+//要#include <stdlib.h>
+//qsortvoid qsort(void* base, size_t n, size_t size, int (*cmp)(const void*, const void*));
+//compare:是指向函數的指標，這是比較元素大小的函數
+//陣列是參數 base，n 是陣列大小，size 是每個元素的大小
+//會從a[0]開始，所以要注意輸入的array要從0~n-1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int vec[10005];
+
+int compare(const void *a, const void *b)//這函式是 qsort 所需的比較函式
+{
+      int c = *(int *)a;
+      int d = *(int *)b;
+      if(c < d) return -1;         //傳回 -1 代表 a < b
+      else if (c == d) return 0;  //傳回   0 代表 a = b
+      else return 1;             //傳回  1 代表 a>b
+}
+
+int main(){
+    int t;
+    scanf("%d",&t);
+    while(t){
+        int n;
+        scanf("%d",&n);
+        for(int i=0;i<n;i++)scanf("%d",&vec[i]);
+        qsort(vec,n,sizeof(int),compare);
+        for(int i=0;i<n;i++){
+          if(i!=n-1)printf("%d ",vec[i]);
+          else printf("%d\n",vec[i]);
+          //最後輸出要注意，即使最後vec[n-1]後只多一格空白也會被算錯誤輸出
+        }
+        t--;
+    }
+}
+
