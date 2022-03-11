@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int board[5][5];
+int bingo[5][5];
+
+int check(){
+    int point=0;
+    //確認橫排
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++){
+            if(bingo[i][j])point++;
+        }
+        //if(point==5)printf("橫的\n");
+        if(point==5)return 1;
+        point=0;
+    }
+    //確認直排
+    for(int j=0;j<5;j++){
+        for(int i=0;i<5;i++)if(bingo[i][j])point++;
+        //if(point==5)printf("直的!\n");
+        if(point==5)return 1;
+        point=0;
+    }
+   //確認左上到右下(斜
+	for(int i=0;i<5;i++){
+ 		if(bingo[i][i]) point++;
+ 		//if(point==5)printf("左上到右下\n");
+	    if(point== 5) return 1;
+	}
+	point = 0;//記得歸零
+
+ //確認右上到左下(斜
+	for(int i=0;i<5;i++){
+		if(bingo[i][4-i]) point++;
+		//if(point==5)printf("右上到左下\n");
+		if(point== 5) return 1;
+	}
+	point= 0;
+	return 0;
+}
+
+
+int main(){
+    int t;
+
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++)scanf("%d",&board[i][j]);
+    }
+    scanf("%d",&t);
+    for(int i=1;i<=t;i++){
+        int n;
+        scanf("%d",&n);
+        int b;
+        int flag=0;
+        for(int j=1;j<=n;j++){
+            scanf("%d",&b);
+            for(int l=0;l<5;l++){
+                for(int m=0;m<5;m++){
+                    if(board[l][m]==b)bingo[l][m]=1;
+                    //printf("l:%d m:%d %d\n",l,m,bingo[l][m]);
+                }
+            }
+            //題目說要最小，所以要設一個flag，確保是第一個印的
+            if(check()&&flag==0){
+                printf("Case #%d: %d\n",i,j);
+                flag=1;
+            }else if(!check()&&j==n)printf("Case #%d: Not yet \\(^o^)/\n",i);
+            //反斜線要打兩個才印的出來
+        }
+        for(int l=0;l<5;l++){
+            for(int m=0;m<5;m++)bingo[l][m]=0;
+        }
+        //別忘記歸零，否則下個case會出錯
+    }
+}
