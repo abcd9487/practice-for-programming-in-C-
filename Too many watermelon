@@ -1,0 +1,36 @@
+#include <stdio.h>
+int seq[200005];
+//ex 1 2 5 6 4 3
+//seq[1]=1 seq[2]=2 seq[5]=3 seq[6]=4 seq[4]=5 seq[3]=6
+//可看做吃到編號i所需要吃掉的數量
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int eaten=0;//已吃數量
+	int eat;//將要吃的數量
+	for(int i=1;i<=n;i++){
+        int w;
+        scanf("%d",&w);
+        seq[w]=i;
+	}
+	//for(int i=1;i<=n;i++)printf("%d\n",seq[i]);
+	for(int i=1;i<=n;i++){
+        int b;
+        scanf("%d",&b);
+        if(seq[b]<eaten)eat=0;//若順序數小於已吃數量，則不用吃
+        //ex request= 4 5 6 1 2 3
+        //i=1 eaten=0 目標吃到編號4->需吃5顆(eat=seq[4]-eaten)->eat=5->eaten變為5)=seq[4])
+        //i=2 eaten=5 目標吃到編號5，由於eaten>吃到目標5需要的數量，所以eat=0
+        //i=6 eaten=5 目標吃到編號3->需吃seq[3]=6-eaten=1顆->eat=1,eaten=seq[3]=6
+        else {
+            eat=seq[b]-eaten;
+            eaten=seq[b];
+            //printf("i:%d eat:%d eaten:%d\n",i,eat,eaten);
+        }
+        if(i!=n)printf("%d ",eat);//避免多餘空格
+        else printf("%d",eat);
+	}
+	printf("\n");
+
+}
