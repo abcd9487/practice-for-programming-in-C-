@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+
+long long int gcd(long long int m,long long int a){
+    if(a==0)return m;
+    return gcd(a,m%a);
+    //ex gcd(7,6)
+    //return gcd(6,1)
+    //gcd(6,1)
+    //return gcd(1,0)
+    //return 1
+}
+
+long long int lcm(long long int a,long long int b,long long int c){
+    long long int tmp=0;
+    tmp=a*(b/gcd(a,b));
+  //若用a*b/gcd(a,b)的話，a*b有可能會超過long long int的範圍
+    return tmp*(c/gcd(tmp,c));
+}
+
+int main(){
+    int t;
+    scanf("%d",&t);
+    long long int n,x1,x2,x3;
+    //printf("%lld\n",lcm(8,25,2));
+
+    while(t--){
+        scanf("%lld %lld %lld %lld",&n,&x1,&x2,&x3);
+        x1=gcd(n,x1);
+        x2=gcd(n,x2);
+        x3=gcd(n,x3);
+        //printf("%lld %lld %lld\n",x1,x2,x3);
+        printf("%lld\n",n/lcm(x1,x2,x3));
+    }
+
+}
