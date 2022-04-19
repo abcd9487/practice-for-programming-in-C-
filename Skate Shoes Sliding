@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+
+
+int main(){
+    int n;
+    scanf("%d",&n);
+    char S[n+5];
+    for(int i=0;i<n;i++)scanf("%c",&S[i]);
+
+    printf("%d\n",n+1);
+}
+/*
+隨便舉幾個例子:
+ex: RLRLLRR
+數值變化:-3~4，共8個可能
+ex: LLLRLR
+數值變化:-4~2，共7個可能
+ex: LLLLLLL
+數值變化:-7~0，共8個可能
+不難發現，不管input S為何，答案皆為n+1
+*/
