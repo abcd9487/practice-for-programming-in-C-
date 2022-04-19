@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int count[1000005];
+
+int counting(int i){
+    int ans=0;
+    while(i){
+        if(i%10==1)ans++;
+        i=i/10;
+    }
+    return ans;
+}
+
+int main(){
+    int t;
+    scanf("%d",&t);
+
+    for(int i=1;i<=1000000;i++){
+        count[i]=counting(i)+count[i-1];
+    }
+
+    int a,b;
+    while(t--){
+        scanf("%d %d",&a,&b);
+        printf("%d\n",count[b]-count[a-1]);
+    }
+
+}
