@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+
+int line[105][105];
+//line[1][2]=1代表第一點和第二點之間可以連線
+
+int main(){
+    int T;
+    scanf("%d",&T);
+
+    while(T--){
+        int N;
+        int ans=0;
+        scanf("%d",&N);
+        long long int x[N+5];
+        long long int y[N+5];
+        //窩也不知道為啥開long long 讀就AC QQ
+        for(int i=0;i<N;i++)scanf("%lld %lld",&x[i],&y[i]);
+
+        for(int i=0;i<N;i++){
+            for(int j=i+1;j<N;j++){
+                for(int k=j+1;k<N;k++){
+                    long long int a=(y[k]-y[j])*(x[k]-x[i]);
+                    long long int b=(x[k]-x[j])*(y[k]-y[i]);
+                    if(a==b){
+                        if(line[i][j]==0&&line[i][k]==0&&line[j][k]==0){
+                           ans++;
+                        }
+                                                  
+                         line[i][j]=1;
+                         line[i][k]=1;
+                         line[j][k]=1;
+                         //要注意不能打在上面if{}內!
+                    }
+                }
+            }
+        }
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++)line[i][j]=0;
+        }
+        printf("%d\n",ans);
+    }
+}
