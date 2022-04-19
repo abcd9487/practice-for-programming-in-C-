@@ -5,4 +5,6 @@ int main(){
   scanf("%lf %lf",&a,&b);
   printf("%.4f",a*b);
 }
-//%.*f:小數點後顯示*位
+
+//printf("%.*f\n",z,x*y);
+//%.*f:小數點後顯示z位
