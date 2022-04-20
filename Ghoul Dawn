@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+
+long long int pre[5005];
+
+int main(){
+    int n,k;
+    scanf("%d %d",&n,&k);
+    for(int i=1;i<=n;i++){
+        long long int a;
+        scanf("%lld",&a);
+        pre[i]=pre[i-1]+a;
+    }
+    double max=0;
+    for(int i=k;i<=n;i++){
+        for(int j=1;j<=i;j++){
+            double b;
+            //要注意是i-j+1>=k，不是i-j>=l，否則會少算!
+            if(i-j+1>=k){
+                int c=i-j+1;
+                b=(double)(pre[i]-pre[j-1])/c;
+                //要加double以免發生以下錯誤
+                //若已知(pre[i]-pre[j-1])/c=25/3
+                //但b print出來會是8.000而非8.333
+            }else b=-978;
+
+            if(b>max)max=b;
+        }
+    }
+    printf("%.3f\n",max);
+}
