@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <string.h>
+/*
+題意:
+s[i]和s[j]是否相同?
+中建reverse後是否一樣?
+*/
+
+char s[2005];
+int len;
+int ans;
+
+void check(int l){
+    int i,j,k;
+
+    for(int i=0;i<l;i++){
+//迴圈裡面雙條件:
+//i:紀錄當前位置
+//j
+//k
+//ex a a a a a
+//len=5
+//1:i=0 j=0 k=1 ->ans++
+//i=0 j=-1->j should >0->to 2
+//2:i=0 j=-1->j should>0 ->i++
+//1:i=1 j=1 k=2 ->ans++
+//1:i=1 j=0 k=3 ->ans++
+//1:i=1 j=-1->to 2
+//2:i=1 j=0 k=2->ans++
+//2:i=1 j=-1->i++
+//1:i=2 j=2 k=3->ans++
+//1:i=2 j=1 k=4->ans++
+//1:i=2 j=0 k=5->k should <=4->to 2
+//2:i=2 j=1 k=3->ans++
+//2:i=2 j=0 k=4->ans++
+//2:i=2 j=-1-> i++
+//1:i=3 j=3 k=4->ans++
+//1:i=3 j=2 k=5->k should <=4-> to 2
+//2:i=3 j=1 k=4->ans++
+//2:i=3 j=0 k=5->i++
+//1:i=4 j=4 k=5->to 2
+//2:i=4 j=4 k=5-> i++
+//i=5-> end for loop
+        for(int j=i,k=i+1;j>=0&&k<=l-1;j--,k++){
+            if(s[j]==s[k]){
+                ans++;
+                //printf("@ i:%d j:%d k:%d ans:%d s[%d]:%c s[%d]:%c\n",i,j,k,ans,j,s[j],k,s[k]);
+            }
+            else {
+                //printf("!!@ i:%d j:%d k:%d ans:%d s[%d]:%c s[%d]:%c\n",i,j,k,ans,j,s[j],k,s[k]);
+                break;
+            }
+        }//1
+
+        for(int j=i-1,k=i+1;j>=0&&k<=l-1;j--,k++){
+            if(s[j]==s[k]){
+                ans++;
+                //printf("i:%d j:%d k:%d ans:%d s[%d]:%c s[%d]:%c\n",i,j,k,ans,j,s[j],k,s[k]);
+            }else {
+                //printf("! i:%d j:%d k:%d ans:%d s[%d]:%c s[%d]:%c\n",i,j,k,ans,j,s[j],k,s[k]);
+                break;
+            }//2
+        }
+    }
+}
+
+int main(){
+
+
+    while(scanf("%s",&s)!=EOF){
+        len=strlen(s);
+        //printf("%d\n",len);
+        check(len);
+
+        printf("%d\n",ans);
+        ans=0;
+    }
+}
