@@ -1,18 +1,42 @@
 #include <string.h>
 #include <stdio.h>
-void checkit(int head, int tail, int len_s);
 
 int ans;
 char s[2000];
+
+void checkit(int head, int tail, int len_s)
+{
+    //printf("head:%d tail:%d ???\n",head,tail);
+    if(tail>=len_s)return;
+    if(s[head] == s[tail]){
+        ans++;
+        //printf("head:%d tail:%d ans:%d\n",head,tail,ans);
+        if(head-1 >= 0 && tail+1 <= len_s-1){
+            //能確保:
+            //s[head]=s[tail]
+            //so 擴展到 check(head-1,tail+1,len)是OK的!
+            checkit(head-1, tail+1, len_s);
+
+        }
+        return;
+        //printf("head:%d tail:%d ~~~\n",head,tail);
+    }
+    //printf("NOOO!head:%d tail:%d ans:%d\n",head,tail,ans);
+    return;
+}
+
 
 int main(void)
 {
     while(~scanf("%s", &s)){
         ans = 0;
         int len_s = strlen(s);
-        for(int head = 0;head < len_s;head++){
-            checkit(head, head+1, len_s);
-            checkit(head, head+2, len_s);
+        //雙層for迴圈會TLE
+        for(int head = 0;head < len_s-1;head++){
+            //checkit(head,len_s-1,len_s);
+            checkit(head,head+1,len_s);
+            checkit(head,head+2,len_s);
+
         }
 
         printf("%d\n", ans);
@@ -20,16 +44,6 @@ int main(void)
     return 0;
 }
 
-void checkit(int head, int tail, int len_s)
-{
-    if(tail>=len_s)return;
-    if(s[head] == s[tail]){
-        ans++;
-        if(head-1 >= 0 && tail+1 <= len_s-1)
-            checkit(head-1, tail+1, len_s);
-    }
-    return;
-}
 /*
 ex a b a c a
 len=5
