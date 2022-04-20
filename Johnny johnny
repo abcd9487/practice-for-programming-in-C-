@@ -1,23 +1,25 @@
 #include <stdio.h>
-int ans, n, k, a[20];
-void eq(int i,int sum)
-{	
-	if(sum == k){
-     ans++; 
-     return;
-  }
-	if(i == n) return;
-	eq(i+1,sum+a[i]);
-	eq(i+1,sum);
+#include <string.h>
+#include <stdlib.h>//qsort()需要
+int n,k,a[25];
+//Johnny Johnny
+int ans=0;
+void eq(int i,int sum){
+    //i:目前在第幾個數字
+    //sum:目前的和
+    if(sum==k){
+        ans++;
+        return;
+    }
+    if(i==n)return;
+    eq(i+1,sum+a[i]);//取用a[i]
+    eq(i+1,sum);//取用a[i]
 }
-int main()
-{
-	int i;
-	scanf("%d%d",&n,&k);
-	for(i=0;i<n;i++)
-		scanf("%d",&a[i]);
-	eq(0,0);
-	printf("%d\n",ans);
-	return 0;
+
+int main(){
+    scanf("%d %d",&n,&k);
+    for(int i=0;i<n;i++)scanf("%d",&a[i]);
+    eq(0,0);
+    printf("%d\n",ans);
 }
 //若測資為 1 1 1 1 1，則答案是錯的
