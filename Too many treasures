@@ -1,23 +1,29 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-long long int prefix[1000005];
+//too many treasure
+//the sequence index starts from 1
+//decreasing order->越前面的pre值越大
+long long int pre[1000005];
+int treasure[1000005];
 
 int main(){
     int n,q;
     scanf("%d %d",&n,&q);
-    int number;
-    prefix[0]=0;
     for(int i=1;i<=n;i++){
-       scanf("%d",&number);
-       if(number>0)prefix[i]=prefix[i-1]+number;
-       else prefix[i]=prefix[i-1];
+        scanf("%d",&treasure[i]);
+        if(treasure[i]>0)pre[i]=pre[i-1]+treasure[i];
+        else pre[i]=pre[i-1];
     }
-    for(int i=1;i<=q;i++){
-        int l,r,m;
-        scanf("%d %d %d",&l,&r,&m);
-        printf("%lld\n",prefix[l+m-1]-prefix[l-1]);
-        //m為最多可奪取的寶物
-        //且此題是由小排到大，不需要額外考慮sorting的問題
-        //待補
+    //因為已經排序好(decreasing order)，所以越前面越大
+    //又最多可取m個
+    //能取範圍可簡化為:l~l+m-1，不需要r!
+    while(q--){
+        int left,right,couldtake;
+        scanf("%d %d %d",&left,&right,&couldtake);
+        printf("%lld\n",pre[left+couldtake-1]-pre[left-1]);
     }
+    //若今天是未排序狀態，則需要用qsort() or 其他方式求得
+
 }
