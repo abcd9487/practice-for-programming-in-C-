@@ -41,6 +41,21 @@ void check(int l){
 //1:i=4 j=4 k=5->to 2
 //2:i=4 j=4 k=5-> i++
 //i=5-> end for loop
+//ex abaca
+//len=5
+//1:i=0 j=0 k=1 ->break -> to 2
+//2:i=- j=-1-> i++
+//1:i=1 j=1 k=2-> break -> to 2
+//2:i=1 j=0 k=2->ans++
+//2:i=1 j=-1-> i++
+//1:i=2 j=2 k=3->break -> to 2
+//2:i=2 j=1 k=3->break-> i++
+//1:i=3 j=3 k=4 ->break ->to 2
+//2:i=3 j=2 k=4 ->ans++ 
+//2:i=3 j=1 k=5-> break -> i++
+//1:i=4 j=4 k=5->break-> to 2
+//2:i=4 j=3 k=5->break-> i++
+//i=5 -> end for loop
         for(int j=i,k=i+1;j>=0&&k<=l-1;j--,k++){
             if(s[j]==s[k]){
                 ans++;
