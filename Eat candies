@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>//qsort()需要
+
+//eat candies
+int color[4];
+
+int comp(const void *a,const void *b){
+    int c=*(int*)a;
+    int d=*(int*)b;
+    if(c==d)return 0;
+    else if(c>d)return 1;
+    else return -1;
+}
+
+int main(){
+
+    int t;
+    scanf("%d",&t);
+
+    while(t--){
+        scanf("%d %d %d",&color[0],&color[1],&color[2]);
+        qsort(color,3,sizeof(int),comp);
+        if(color[0]+color[1]<=color[2])printf("%d\n",color[0]+color[1]);
+        else printf("%d\n",color[2]+(color[0]+color[1]-color[2])/2);
+    }
+
+}
+/*
+不需要用到qsort()的做法
+#include<stdio.h>
+#include<string.h>
+
+int main(){
+    int t,r,g,b;
+    scanf("%d",&t);
+    while(t--){
+        int temp=-2;
+        scanf("%d %d %d",&r,&g,&b);
+        if(r>b){
+            temp=r;
+            r=b;
+            b=temp;
+        }
+        if(g>b){
+            temp=g;
+            g=b;
+            b=temp;
+        }
+        if(r+g<b)printf("%d\n",r+g);
+        else printf("%d\n",b+(r+g-b)/2);
+    }
+}
+*/
