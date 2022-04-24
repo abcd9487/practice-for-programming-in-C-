@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<string.h>
+long long int mod=(long long )1e9+7;
+
+
+char s[3000001],sub[3000001];
+int main(){
+    int g;
+    scanf("%d",&g);
+    for(int o=1;o<=g;o++){
+        int time;
+        long long int slen,sub_len,sslen,add;
+        scanf("%d",&time);
+        scanf("%s",s);
+        slen=strlen(s);
+        sslen=slen;
+        for(int i=0;i<=time-1;i++){
+            int copytime=s[i]-'0'-1;
+            //printf("%d\n",copytime);
+            sub_len=(sslen-i+mod-1)%mod;
+            if(slen<time){
+                strncpy(sub,s+i+1,sub_len);
+                sub[sub_len]='\0';
+                //printf("%s\n",sub);
+                for(int j=1;j<=copytime&&slen<time;j++){
+                        strcat(s,sub);
+                        //printf("%s\n",s);
+                        slen+=sub_len;
+                }
+            }
+
+            //printf("copytime:%lld\n",copytime);
+            add= copytime%mod*sub_len%mod;
+            //printf("add:%lld\n",add);
+            //printf("1:sslen:%lld\n",sslen);
+            sslen=add%mod+sslen%mod;
+            //printf("2:sslen:%lld\n",sslen);
+            sslen=sslen%mod;
+
+        }
+        printf("%lld\n",sslen);
+    }
+
+    return 0;
+
+}
