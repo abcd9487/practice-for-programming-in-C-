@@ -1,0 +1,54 @@
+
+
+#include <stdio.h>
+int ans=0;
+int decreasing[30],col[15],increasing[30];
+/*
+0 0 0 A 0 0 0 A
+A 0 0 A 0 0 A 0
+0 A 0 A 0 A 0 0
+0 0 A A A 0 0 0
+A A A @ A A A A
+0 0 A A A 0 0 0
+0 A 0 A 0 A 0 0
+A 0 0 A 0 0 A 0
+
+欲在@處擺放
+需確認上圖A處有無擺其他Q
+不難發現，
+右斜下方->左斜上方:4+3=3+4=5+2，即row+col值皆相同->用increasing紀錄
+左斜上方->右斜下方:4-3+13=5-4+13=1-0+13，即row-col+13值皆相同->用decreasing紀錄
+為1代表這些點中有一個已經擺放->不能擺這
+
+*/
+
+void check(int row,int n){
+    if(row==n){
+        ans++;
+        return;
+    }
+    //i:column
+    for(int i=0;i<n;i++){
+        if(col[i]+increasing[row+i]+decreasing[row-i+13]==0){
+            col[i]=1;
+            increasing[row+i]=1;
+            decreasing[row-i+13]=1;
+            check(row+1,n);
+            col[i]=0;
+            increasing[row+i]=0;
+            decreasing[row-i+13]=0;
+        }
+
+
+    }
+}
+
+
+int main(){
+    int n;
+    while(scanf("%d",&n)!=EOF){
+        check(0,n);
+        printf("%d\n",ans);
+        ans=0;
+    }
+}
