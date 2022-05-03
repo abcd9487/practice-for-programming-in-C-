@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int N[1005][1005];
+int n;
+int check(int k,int mode){
+  if(mode==0){
+    int temp=0;
+    for(int j=0;j<n;j++){
+      if(N[k][j]>temp)temp=N[k][j];
+    }
+    return temp;
+  }else {
+    int temp=99999;//題目最大值500000
+    for(int j=0;j<n;j++){
+      if(N[j][k]<temp)temp=N[j][k];
+    }
+    return temp;  
+  }
+}
+
+int main(){
+  scanf("%d",&n);
+  for(int i=0;i<n;i++)
+    for(int j=0;j<n;j++)scanf("%d",&N[i][j]);
+  for(int i=0;i<n;i++){
+    int temp=check(i,0);
+    if(i!=n-1)printf("%d ",temp);
+    else printf("%d\n",temp);
+  }
+  for(int i=0;i<n;i++){
+    int temp=check(i,1);
+    if(i!=n-1)printf("%d ",temp);
+    else printf("%d\n",temp);
+  }
+}
