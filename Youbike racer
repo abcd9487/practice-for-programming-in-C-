@@ -1,0 +1,43 @@
+#include <stdio.h>
+long long int a[100005];
+int n,k;
+long long int pre[100005];
+long long int check(long long int current,long long int next,long long int current_charge,long long int ans){
+    if(current==n)return ans;
+    if(pre[next]>k)return -1;
+
+    if(current_charge>=pre[next]){
+        //printf("!!!\n");
+        //printf("current:%lld next:%lld %lld\n",current,next,current_charge-pre[next]);
+        //printf("!!!\n");
+        check(current+1,next+1,current_charge-pre[next],ans);
+    }else {
+       // printf("@@\n");
+        //printf("current:%lld next:%lld %lld\n",current,next,current_charge);
+        //printf("@@\n");
+        //long long int a=current_charge+k-pre[next]; 不需要!
+        //check(current,next,a,ans+1) -> 可能出錯!
+        check(current,next,k,ans+1);  // 改成重新充滿能量跳到目前點就好!(ans要+1
+    }
+}
+
+int main(){
+    scanf("%d %d",&n,&k);
+    for(int i=1;i<=n;i++)scanf("%lld",&a[i]);
+
+    for(int i=1;i<=n;i++){
+        pre[i]=a[i]-a[i-1];
+    }
+    /*
+    int flag=0;
+    for(int i=1;i<=n;i++){
+        //printf("%lld\n",pre[i]);
+    }
+    */
+    long long int a1=check(0,1,k,0);
+    if(a1==-1)printf("The Legend Falls.\n");
+    else {
+      
+        printf("%lld\n",a1);
+    }
+}
